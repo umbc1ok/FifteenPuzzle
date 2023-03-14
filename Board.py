@@ -9,17 +9,23 @@ class Board:
     def __init__(self, w, h):
         self.w = w
         self.h = h
-        self.tab = reader.parseFromFile()
 
+    def readFromFile(self):
+        self.tab = reader.parseFromFile()
     def testprint(self):
         print(self.tab)
 
     def checkBoard(self):
         size = self.w * self.h
-        if self.tab[size - 1] == 0:
+        if int(self.tab[size - 1]) != 0:
             return False
-        for i in range (0,size-1):
-            if self.tab[i] != i-1:
+        for i in range(0, size - 2):
+            if int(self.tab[i]) != i + 1:
                 return False
         return True
 
+
+    def __deepcopy__(self, memodict={}):
+        new = Board(self.w, self.h)
+        new.tab = self.tab
+        return new

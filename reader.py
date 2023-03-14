@@ -10,4 +10,5 @@ def parseFromFile():
             row = line.strip().split(" ")
             for element in row:
                 tab.append(element)
+    f.close()
     return tab
