@@ -1,7 +1,5 @@
 import copy
 
-import reader
-
 
 class Board:
 
@@ -26,3 +24,6 @@ class Board:
         tabcopy = copy.deepcopy(self.tab)
         new = Board(self.w, self.h, tabcopy)
         return new
+
+    def __hash__(self):
+        return hash(self.tab)
