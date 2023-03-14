@@ -4,16 +4,12 @@ import reader
 
 
 class Board:
-    w = 1
-    h = 1
-    tab = []
 
-    def __init__(self, w, h):
+    def __init__(self, w, h, tab):
         self.w = w
         self.h = h
+        self.tab = tab
 
-    def readFromFile(self):
-        self.tab = reader.parseFromFile()
     def testprint(self):
         print(self.tab)
 
@@ -26,8 +22,7 @@ class Board:
                 return False
         return True
 
-
     def __deepcopy__(self, memodict={}):
-        new = Board(self.w, self.h)
-        new.tab = copy.deepcopy(self.tab)
+        tabcopy = copy.deepcopy(self.tab)
+        new = Board(self.w, self.h, tabcopy)
         return new

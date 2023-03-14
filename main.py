@@ -1,4 +1,5 @@
 import Board
+import reader
 
 
 def swap(board, zeroIndex, otherindex):
@@ -12,7 +13,7 @@ def makeMove(board, direction, index):
         a = int(index / board.w)
         if a != 3:
             swap(board, index, index + board.w)
-    if direction == "U":
+    elif direction == "U":
         a = int(index / board.w)
         if a != 0:
             swap(board, index, index - board.w)
@@ -70,7 +71,6 @@ def dfs(board, depth, maxdepth, lastmove):
     return
 
 
-p1 = Board.Board(4, 4)
+p1 = Board.Board(4, 4, reader.parseFromFile())
 p1.testprint()
-p1.readFromFile()
-dfs(p1, 0, 10, None)
+dfs(p1, 0, 7, None)
