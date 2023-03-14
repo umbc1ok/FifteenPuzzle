@@ -1,3 +1,5 @@
+import copy
+
 import reader
 
 
@@ -27,5 +29,5 @@ class Board:
 
     def __deepcopy__(self, memodict={}):
         new = Board(self.w, self.h)
-        new.tab = self.tab
+        new.tab = copy.deepcopy(self.tab)
         return new
