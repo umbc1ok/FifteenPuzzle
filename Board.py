@@ -26,4 +26,4 @@ class Board:
         return new
 
     def __hash__(self):
-        return hash(self.tab)
+        return hash(tuple(self.tab))

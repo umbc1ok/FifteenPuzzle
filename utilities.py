@@ -26,13 +26,14 @@ def findZero(board):    #znajduje index zera na planszy
 def checkMoves(board, lastmove):             #zwraca liste dostepnych ruchow
     index = findZero(board)
     moves = list()
-    if (int(index / board.w) != 0) and (lastmove != "D"):
-        moves.append("U")
-    if int(index / board.w) != board.h - 1 and (lastmove != "U"):
-        moves.append("D")
     if index % board.w != 0 and (lastmove != "R"):
         moves.append("L")
     if index % board.w != board.w - 1 and (lastmove != "L"):
         moves.append("R")
+    if (int(index / board.w) != 0) and (lastmove != "D"):
+        moves.append("U")
+    if int(index / board.w) != board.h - 1 and (lastmove != "U"):
+        moves.append("D")
+
 
     return moves
