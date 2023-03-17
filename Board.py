@@ -7,17 +7,26 @@ class Board:
         self.w = w
         self.h = h
         self.tab = tab
-        self.lastmove = null
+        self.lastmove = None
 
     def testprint(self):
-        print(self.tab)
+        i = 0
+        for n in range(0, self.h):
+            for m in range(0, self.w):
+                print(self.tab[i], end=" ")
+                i += 1
+            print("\n")
+
+
 
     def checkBoard(self):
         size = self.w * self.h
         if int(self.tab[size - 1]) != 0:
+            print("checking last place")
             return False
         for i in range(0, size - 2):
             if int(self.tab[i]) != i + 1:
+                print("something at wrong place")
                 return False
         return True
 

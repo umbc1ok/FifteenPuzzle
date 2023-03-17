@@ -15,12 +15,13 @@ class bfs:
 
     def solve(self, board, solution):
         self.visited.add(board.__hash__())
-        self.queue.popleft()
+        if len(self.queue) > 0:
+            self.queue.pop(0)
         # dane statystyczne
         #jeśli dojdzie do końca linii przerzucić na kolejną głębokość (czzy nie lepiej dodać pole depth do board i ta która będzie dobra to to zwracać?)
 
         self.counter = self.counter+1
-        if board.lastmove != null:
+        if board.lastmove is not None:
             solution += board.lastmove
         #solution to string, na ktory sklada sie ciag ruchow potrzebnych do otrzymania rozwiazania
 
@@ -33,7 +34,8 @@ class bfs:
 
         #if depth >= maxdepth:
             #return
-        moves = u.checkMoves(board, lastmove)
+
+        moves = u.checkMoves(board, board.lastmove)
         for move in moves:
             newState = board.__deepcopy__()
             u.makeMove(newState, move, u.findZero(newState))    #index funkcja (argument to wartosc z listy, w tym przypadku 0)
@@ -41,19 +43,24 @@ class bfs:
             if newState.__hash__() not in self.visited:
                 self.queue.append(newState)
                 #self.solve(newState, depth + 1, maxdepth, move, solution)
-            if self.found is True:
-                return
-        for q in self.queue:
-            self.solve(q, solution)
+            #if self.found is True:
+             #   print(self.found)
+              #  print(newState.checkBoard())
+               # newState.testprint()
+                #return
+        if self.found is False:
+            print("checking next board in queue")
+            print(self.queue[0].testprint())
+            self.solve(self.queue[0], solution)
         return
 
 
 
 p1 = Board.Board(4, 4, reader.parseFromFile())
 p1.testprint()
-solver = dfs()
+solver = bfs()
 start = time.time()
-solver.solve(p1, 0, 100, "", "")
+solver.solve(p1, "")
 end = time.time() - start
 print(end)
 print(solver.counter)
