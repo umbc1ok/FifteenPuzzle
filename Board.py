@@ -7,6 +7,7 @@ class Board:
         self.w = w
         self.h = h
         self.tab = tab
+        self.lastmove = null
 
     def testprint(self):
         print(self.tab)
