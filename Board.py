@@ -22,11 +22,11 @@ class Board:
     def checkBoard(self):
         size = self.w * self.h
         if int(self.tab[size - 1]) != 0:
-            print("checking last place")
+            #print("checking last place")
             return False
         for i in range(0, size - 2):
             if int(self.tab[i]) != i + 1:
-                print("something at wrong place")
+                #print("something at wrong place")
                 return False
         return True
 
