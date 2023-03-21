@@ -1,5 +1,5 @@
 import Board
-
+##### KURDE TRZEBA POPRAWIC TO POTEM ZEBY NIE BYLO PROBLEMU ZE NIE CZYTA WYMIAROW Z PLIKU######
 
 def parseFromFile():
     f = open("uklad", "r")

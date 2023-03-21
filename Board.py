@@ -29,6 +29,12 @@ class Board:
                 #print("something at wrong place")
                 return False
         return True
+    def getXYposition(self,index):
+        x = int(index % self.w)
+        y = int(index / self.w)
+        return [x,y]
+
+
 
     def __deepcopy__(self, memodict={}):
         tabcopy = copy.deepcopy(self.tab)

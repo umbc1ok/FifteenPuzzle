@@ -46,7 +46,7 @@ p1 = Board.Board(4, 4, reader.parseFromFile())
 p1.testprint()
 solver = dfs()
 start = time.time()
-solver.solve(p1, 0, 100, "", "")
+solver.solve(p1, 0, 15, "", "")
 end = time.time() - start
 print(end)
 print(solver.counter)
