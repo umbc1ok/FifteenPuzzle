@@ -48,8 +48,8 @@ p1.testprint()
 solver = dfs()
 start = time.time()
 solver.solve(p1, 0, 15, "", "")
-end = time.time() - start
-print(end)
+solvingtime = time.time() - start
+print("Czas dzialania:", solvingtime, "s")
 print("Stany odwiedzone: ", solver.counter)
 print("Stany preztworzone: ", solver.visited.__len__())
 print("Maksymalna glebokosc: " ,solver.reachedDepth)
