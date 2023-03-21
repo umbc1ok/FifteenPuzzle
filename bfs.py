@@ -11,11 +11,13 @@ class bfs:
         self.counter = 0
         self.reachedDepth = 0
         self.found = False
-        self.visited = set()
+        self.visited = set()    #przetworzone
         self.queue = []
+        self.solution = ""
 
-    def solve(self, board, solution):
+    def solve(self, board):
         self.visited.add(board.__hash__())
+
         if len(self.queue) > 0:
             self.queue.pop(0)
         # dane statystyczne
@@ -23,14 +25,15 @@ class bfs:
 
         self.counter = self.counter + 1
         if board.lastmove is not None:
-            solution += board.lastmove
+            board.solution = board.solution + board.lastmove
         # solution to string, na ktory sklada sie ciag ruchow potrzebnych do otrzymania rozwiazania
 
         # ALGORYTM
         if board.checkBoard() is True:
             self.found = True
-            print(solution)
-            return solution
+            print(board.solution)
+            solver.solution = board.solution
+            return board.solution
 
         # if depth >= maxdepth:
         # return
@@ -42,6 +45,7 @@ class bfs:
                        u.findZero(newState))  # index funkcja (argument to wartosc z listy, w tym przypadku 0)
             newState.lastmove = move
             if newState.__hash__() not in self.visited:
+                self.counter = self.counter + 1
                 self.queue.append(newState)
                 # self.solve(newState, depth + 1, maxdepth, move, solution)
             # if self.found is True:
@@ -52,7 +56,7 @@ class bfs:
         if self.found is False:
             print("checking next board in queue")
             print(self.queue[0].testprint())
-            self.solve(self.queue[0], solution)
+            self.solve(self.queue[0])
         return
 
 
@@ -60,8 +64,9 @@ p1 = Board.Board(4, 4, reader.parseFromFile())
 p1.testprint()
 solver = bfs()
 start = time.time()
-solver.solve(p1, "")
+solver.solve(p1)
 end = time.time() - start
 print(end)
-print(solver.counter)
-print(solver.reachedDepth)
+print("Stany odwiedzone: ", solver.counter)
+print("Stany preztworzone: ", solver.visited.__len__())
+print("Maksymalna glebokosc: " ,solver.solution)

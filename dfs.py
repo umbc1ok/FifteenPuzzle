@@ -17,7 +17,7 @@ class dfs:
         # dane statystyczne
         if self.reachedDepth < depth:
             self.reachedDepth = depth
-        self.counter = self.counter+1
+        #self.counter = self.counter+1
         solution += lastmove
         #solution to string, na ktory sklada sie ciag ruchow potrzebnych do otrzymania rozwiazania
 
@@ -31,6 +31,7 @@ class dfs:
         if depth >= maxdepth:
             return
         moves = u.checkMoves(board, lastmove)
+        self.counter = self.counter + len(moves)
         for move in moves:
             newState = board.__deepcopy__()
             u.makeMove(newState, move, u.findZero(newState))    #index funkcja (argument to wartosc z listy, w tym przypadku 0)
@@ -49,5 +50,6 @@ start = time.time()
 solver.solve(p1, 0, 15, "", "")
 end = time.time() - start
 print(end)
-print(solver.counter)
-print(solver.reachedDepth)
+print("Stany odwiedzone: ", solver.counter)
+print("Stany preztworzone: ", solver.visited.__len__())
+print("Maksymalna glebokosc: " ,solver.reachedDepth)

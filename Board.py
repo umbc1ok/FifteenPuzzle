@@ -8,6 +8,7 @@ class Board:
         self.h = h
         self.tab = tab
         self.lastmove = None
+        self.solution = ""
 
     def testprint(self):
         i = 0
@@ -39,6 +40,7 @@ class Board:
     def __deepcopy__(self, memodict={}):
         tabcopy = copy.deepcopy(self.tab)
         new = Board(self.w, self.h, tabcopy)
+        new.solution = copy.deepcopy(self.solution)
         return new
 
     def __hash__(self):
