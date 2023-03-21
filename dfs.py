@@ -47,7 +47,7 @@ p1 = Board.Board(4, 4, reader.parseFromFile())
 p1.testprint()
 solver = dfs()
 start = time.time()
-solver.solve(p1, 0, 15, "", "")
+print(solver.solve(p1, 0, 21, "", ""))
 solvingtime = time.time() - start
 print("Czas dzialania:", solvingtime, "s")
 print("Stany odwiedzone: ", solver.counter)

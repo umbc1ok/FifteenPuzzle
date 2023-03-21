@@ -54,8 +54,8 @@ class bfs:
             # newState.testprint()
             # return
         if self.found is False:
-            print("checking next board in queue")
-            print(self.queue[0].testprint())
+            #print("checking next board in queue")
+            #print(self.queue[0].testprint())
             self.solve(self.queue[0])
         return
 
@@ -69,4 +69,4 @@ solvingtime = time.time() - start
 print("Czas dzialania:", solvingtime, "s")
 print("Stany odwiedzone: ", solver.counter)
 print("Stany preztworzone: ", solver.visited.__len__())
-print("Maksymalna glebokosc: " ,solver.solution)
+print("Maksymalna glebokosc: " ,solver.solution.__len__())

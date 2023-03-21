@@ -6,12 +6,16 @@ def swap(board, zeroIndex, otherindex):   # przesuniecie naszego prostokata, fun
 
 def makeMove(board, direction, index):  #sprawdza ktory ruch ma zostac wykonany i ten wykonuje
     if direction == "D":
+        board.lastmove = "D"
         swap(board, index, index + board.w)
     elif direction == "U":
+        board.lastmove = "U"
         swap(board, index, index - board.w)
     elif direction == "L":
+        board.lastmove = "L"
         swap(board, index, index - 1)
     elif direction == "R":
+        board.lastmove = "R"
         swap(board, index, index + 1)
     else:
         return
