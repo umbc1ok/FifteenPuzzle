@@ -18,7 +18,7 @@ class astar:
 
 
     def solve(self,board, lastmove, solution):
-        #self.visited.add(board.__hash__())
+        self.visited.add(board.__hash__())
         # dane statystyczne
         if self.reachedDepth < board.depth:
             self.reachedDepth = board.depth
@@ -37,10 +37,12 @@ class astar:
             newState = board.__deepcopy__()
             newState.depth = newState.depth+1
             ut.makeMove(newState,move,ut.findZero(newState))
-            self.boards.append(newState)
+            if newState.__hash__() not in self.visited:
+                self.boards.append(newState)
 
         self.boards.sort()
         bestState = self.boards.pop(0)
+        self.visited.add(bestState)
         self.solve(bestState, bestState.lastmove, solution)
         return
 
