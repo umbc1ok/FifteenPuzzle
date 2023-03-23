@@ -15,7 +15,7 @@ class bfs:
         self.queue = []
         self.solution = ""
 
-    def solve(self, board):
+    def solve(self, board, order):
         self.visited.add(board.__hash__())
 
         if len(self.queue) > 0:
@@ -38,7 +38,7 @@ class bfs:
         # if depth >= maxdepth:
         # return
 
-        moves = u.checkMoves(board, board.lastmove)
+        moves = u.next_in_order(order, board)
         for move in moves:
             newState = board.__deepcopy__()
             u.makeMove(newState, move,
@@ -56,7 +56,7 @@ class bfs:
         if self.found is False:
             #print("checking next board in queue")
             #print(self.queue[0].testprint())
-            self.solve(self.queue[0])
+            self.solve(self.queue[0], order)
         return
 
 
@@ -64,7 +64,7 @@ p1 = Board.Board(4, 4, reader.parseFromFile())
 p1.testprint()
 solver = bfs()
 start = time.time()
-solver.solve(p1)
+solver.solve(p1, ['R', 'U', 'L', 'D'])
 solvingtime = time.time() - start
 print("Czas dzialania:", solvingtime, "s")
 print("Stany odwiedzone: ", solver.counter)

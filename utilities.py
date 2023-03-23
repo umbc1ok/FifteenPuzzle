@@ -39,5 +39,13 @@ def checkMoves(board, lastmove):             #zwraca liste dostepnych ruchow
     if int(index / board.w) != board.h - 1 and (lastmove != "U"):
         moves.append("D")
 
-
     return moves
+
+
+def next_in_order(order, board):     #returns list of moves in right order
+    moves = checkMoves(board, board.lastmove)
+    myMoves = list()
+    for o in order:
+        if o in moves:
+            myMoves.append(o)
+    return myMoves
