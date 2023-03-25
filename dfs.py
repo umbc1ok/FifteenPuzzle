@@ -8,7 +8,7 @@ import utilities as u
 class dfs:
 
     def __init__(self):
-        self.counter = 0
+        self.counter = 1
         self.reachedDepth = 0
         self.found = False
         self.visited = set()
@@ -16,6 +16,9 @@ class dfs:
 
     def solve(self, board, depth, maxdepth, lastmove, solution, order):
         self.visited.add(board.__hash__())
+
+        if depth > maxdepth:
+            return
         # dane statystyczne
         if self.reachedDepth < depth:
             self.reachedDepth = depth
@@ -27,12 +30,11 @@ class dfs:
         #ALGORYTM
         if board.checkBoard() is True:
             self.found = True
-            print(solution)
+            #print(solution)
             self.solution = solution
             return solution
 
-        if depth >= maxdepth:
-            return
+
         moves = u.next_in_order(order, board)
         self.counter = self.counter + len(moves)
         for move in moves:
@@ -46,16 +48,17 @@ class dfs:
 
 
 
-p1 = Board.Board(4, 4, reader.parseFromFile())
-p1.testprint()
-solver = dfs()
-start = time.time()
-print(solver.solve(p1, 0, 21, "", "", ['R', 'U', 'L', 'D']))
-solvingtime = time.time() - start
-f1 = 'dfsSollution'
-f2 = 'dfsAdditional'
-saver.saveToFile(solver.found, f1, f2, solver.solution, solver.visited.__len__(), solver.counter, solver.reachedDepth, solvingtime)
-print("Czas dzialania:", solvingtime, "s")
-print("Stany odwiedzone: ", solver.counter)
-print("Stany preztworzone: ", solver.visited.__len__())
-print("Maksymalna glebokosc: ", solver.reachedDepth)
+# p1 = Board.Board(4, 4, reader.parseFromFile("uklad"))
+# p1.testprint()
+# solver = dfs()
+# start = time.time()
+# solver.solve(p1, 0, 20, "", "", ['L', 'U', 'R', 'D'])
+# #print(solver.solution)
+# solvingtime = time.time() - start
+# f1 = 'dfsSollution'
+# f2 = 'dfsAdditional'
+# saver.saveToFile(solver.found, f1, f2, solver.solution, solver.visited.__len__(), solver.counter, solver.reachedDepth, solvingtime)
+# print("Czas dzialania:", solvingtime, "s")
+# print("Stany odwiedzone: ", solver.counter)
+# print("Stany preztworzone: ", solver.visited.__len__())
+# print("Maksymalna glebokosc: ", solver.reachedDepth)

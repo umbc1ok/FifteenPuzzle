@@ -1,8 +1,7 @@
 import Board
-##### KURDE TRZEBA POPRAWIC TO POTEM ZEBY NIE BYLO PROBLEMU ZE NIE CZYTA WYMIAROW Z PLIKU######
 
-def parseFromFile():
-    f = open("uklad", "r")
+def parseFromFile(fileName):
+    f = open("./files/uklady/"+fileName, "r")
     tab = []
     i = 0
     for i, line in enumerate(f.readlines()):
@@ -12,3 +11,17 @@ def parseFromFile():
                 tab.append(element)
     f.close()
     return tab
+def parseHeight(fileName):
+    f = open("./files/uklady/"+fileName, "r")
+    line = f.readline().strip().split(" ")
+    height = line[0]
+
+    f.close()
+    return int(height)
+def parseWidth(fileName):
+    f = open("./files/uklady/" + fileName, "r")
+    line = f.readline().strip().split(" ")
+    width = line[1]
+
+    f.close()
+    return int(width)
