@@ -1,7 +1,7 @@
 import Board
 
 def parseFromFile(fileName):
-    f = open("./files/uklady/"+fileName, "r")
+    f = open(fileName, "r")
     tab = []
     i = 0
     for i, line in enumerate(f.readlines()):
@@ -12,14 +12,14 @@ def parseFromFile(fileName):
     f.close()
     return tab
 def parseHeight(fileName):
-    f = open("./files/uklady/"+fileName, "r")
+    f = open(fileName, "r")
     line = f.readline().strip().split(" ")
     height = line[0]
 
     f.close()
     return int(height)
 def parseWidth(fileName):
-    f = open("./files/uklady/" + fileName, "r")
+    f = open(fileName, "r")
     line = f.readline().strip().split(" ")
     width = line[1]
 

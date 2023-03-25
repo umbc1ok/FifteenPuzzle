@@ -1,5 +1,5 @@
 def saveSollutionToFile(solved, filename, sollution):
-    f = open("./files/zapisane/"+filename, 'w')
+    f = open("./rozwiazania/" + filename, 'w')
     if solved is True:
         f.write(str(len(sollution)))
         f.write('\n'+sollution)
@@ -10,7 +10,7 @@ def saveSollutionToFile(solved, filename, sollution):
 
 
 def saveAdditionalInfoToFile(solved, filename, sollution, visited, processed, maxDepth, execTime):
-    f = open("./files/zapisane/"+filename, 'w')
+    f = open("./rozwiazania/" + filename, 'w')
     if solved is True:
         f.write(str(len(sollution)))
     else:

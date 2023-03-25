@@ -31,7 +31,7 @@ class astar:
         # ALGORYTM
         if board.checkBoard() is True:
             self.found = True
-            print(solution)
+            #print(solution)
             self.solution = solution
             return solution
 

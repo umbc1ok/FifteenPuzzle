@@ -32,7 +32,7 @@ class bfs:
         # ALGORYTM
         if board.checkBoard() is True:
             self.found = True
-            print(board.solution)
+            #print(board.solution)
             self.solution = board.solution
             return board.solution
 
