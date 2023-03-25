@@ -2,6 +2,7 @@ import time
 
 import Board
 import reader
+import saver
 import utilities as u
 
 
@@ -60,12 +61,16 @@ class bfs:
         return
 
 
+
 p1 = Board.Board(4, 4, reader.parseFromFile())
 p1.testprint()
 solver = bfs()
 start = time.time()
 solver.solve(p1, ['R', 'U', 'L', 'D'])
 solvingtime = time.time() - start
+f1 = 'bfsSollution'
+f2 = 'bfsAdditional'
+saver.saveToFile(solver.found, f1, f2, solver.solution, solver.visited.__len__(), solver.counter, solver.reachedDepth, solvingtime)
 print("Czas dzialania:", solvingtime, "s")
 print("Stany odwiedzone: ", solver.counter)
 print("Stany preztworzone: ", solver.visited.__len__())

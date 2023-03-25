@@ -1,5 +1,6 @@
 import Board
 import reader
+import saver
 import utilities as ut
 import time
 
@@ -12,6 +13,7 @@ class astar:
         self.visited = set()
         self.metric = metric
         self.boards = list()
+        self.solution = ''
 
 
 
@@ -30,6 +32,7 @@ class astar:
         if board.checkBoard() is True:
             self.found = True
             print(solution)
+            self.solution = solution
             return solution
 
         moves = ut.checkMoves(board, lastmove)
@@ -52,6 +55,9 @@ solver = astar("manh")
 startTime = time.time()
 solver.solve(p1,"","")
 solvingtime = time.time()-startTime
+f1 = 'astarSollution'
+f2 = 'astarAdditional'
+saver.saveToFile(solver.found, f1, f2, solver.solution, solver.visited.__len__(), solver.counter, solver.reachedDepth, solvingtime)
 print("Czas dzialania:", solvingtime, "s")
 print("Stany odwiedzone: ", solver.boards.__len__())
 print("Stany preztworzone: ", solver.counter)

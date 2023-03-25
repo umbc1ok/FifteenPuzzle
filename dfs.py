@@ -2,6 +2,7 @@ import time
 
 import Board
 import reader
+import saver
 import utilities as u
 
 class dfs:
@@ -11,8 +12,9 @@ class dfs:
         self.reachedDepth = 0
         self.found = False
         self.visited = set()
+        self.solution = ''
 
-    def solve(self,board, depth, maxdepth, lastmove, solution, order):
+    def solve(self, board, depth, maxdepth, lastmove, solution, order):
         self.visited.add(board.__hash__())
         # dane statystyczne
         if self.reachedDepth < depth:
@@ -26,6 +28,7 @@ class dfs:
         if board.checkBoard() is True:
             self.found = True
             print(solution)
+            self.solution = solution
             return solution
 
         if depth >= maxdepth:
@@ -49,7 +52,10 @@ solver = dfs()
 start = time.time()
 print(solver.solve(p1, 0, 21, "", "", ['R', 'U', 'L', 'D']))
 solvingtime = time.time() - start
+f1 = 'dfsSollution'
+f2 = 'dfsAdditional'
+saver.saveToFile(solver.found, f1, f2, solver.solution, solver.visited.__len__(), solver.counter, solver.reachedDepth, solvingtime)
 print("Czas dzialania:", solvingtime, "s")
 print("Stany odwiedzone: ", solver.counter)
 print("Stany preztworzone: ", solver.visited.__len__())
-print("Maksymalna glebokosc: " ,solver.reachedDepth)
+print("Maksymalna glebokosc: ", solver.reachedDepth)
