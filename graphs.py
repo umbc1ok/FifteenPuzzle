@@ -1,5 +1,8 @@
-import matplotlib.pyplot as plt
+from _csv import reader
 
+import chardet as chardet
+import matplotlib.pyplot as plt
+import pandas as pd
 
 def summaryGraph(data, criterion_nr, criterion_name):
     plt.clf()
@@ -231,6 +234,13 @@ def bfsGraph(data, criterion_nr, criterion_name):
 
 # method, order/heuristic, solution length, amount visited, amount processed, max depth, execution time
 
-f = open('data', 'r')
-# odczytać każdą linię do nowego wiersza tabeli i każde dane do kolejnych komórek wg schematu powyżej
-f.close()
+with open('./data/data.csv', 'rb') as f:
+    enc = chardet.detect(f.read())
+#contents = f.read()
+headlines = ("RuchyOdRozwiazania", "numer_ukladanki", "strategia", "piorytet", "dlugosc_rozw", "odwiedzone", "przetworzone", "max_rekurencja", "czas")
+df = pd.read_csv("./data/data.csv", encoding=enc['encoding'], sep=" ", decimal=".", names=headlines)
+pd.set_option('display.max_columns', None)
+print(df)
+
+
+

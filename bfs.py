@@ -21,6 +21,8 @@ class bfs:
 
         if len(self.queue) > 0:
             self.queue.pop(0)
+        if self.reachedDepth < board.depth:
+            self.reachedDepth = board.depth
         # dane statystyczne
         # jeśli dojdzie do końca linii przerzucić na kolejną głębokość (czzy nie lepiej dodać pole depth do board i ta która będzie dobra to to zwracać?)
 
@@ -34,6 +36,7 @@ class bfs:
             self.found = True
             #print(board.solution)
             self.solution = board.solution
+            self.reachedDepth = len(board.solution)
             return board.solution
 
         # if depth >= maxdepth:
