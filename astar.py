@@ -24,16 +24,15 @@ class astar:
         # dane statystyczne
         if self.reachedDepth < board.depth:
             self.reachedDepth = board.depth
-        solution += lastmove
-        #self.counter = self.counter +1
-        # solution to string, na ktory sklada sie ciag ruchow potrzebnych do otrzymania rozwiazania
-
+        board.solution += lastmove
+        #############
         # ALGORYTM
         if board.checkBoard() is True:
             self.found = True
-            #print(solution)
-            self.solution = solution
+            self.solution = board.solution
             return solution
+
+
 
         moves = ut.checkMoves(board, lastmove)
         self.counter = self.counter + len(moves)
@@ -46,7 +45,6 @@ class astar:
 
         self.boards.sort()
         bestState = self.boards.pop(0)
-        #self.visited.add(bestState)
         self.solve(bestState, bestState.lastmove, solution)
         return
 
