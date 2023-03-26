@@ -43,7 +43,7 @@ class Board:
         tabcopy = copy.deepcopy(self.tab)
         new = Board(self.w, self.h, tabcopy)
         new.solution = copy.deepcopy(self.solution)
-        new.depth = self.depth
+        new.depth = copy.deepcopy(self.depth)
         return new
 
     def __hash__(self):

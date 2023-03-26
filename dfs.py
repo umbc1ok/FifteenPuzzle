@@ -11,11 +11,12 @@ class dfs:
         self.counter = 1
         self.reachedDepth = 0
         self.found = False
-        self.visited = set()
+        self.visited = {}
         self.solution = ''
 
     def solve(self, board, depth, maxdepth, lastmove, solution, order):
-        self.visited.add(board.__hash__())
+        #if board.__hash__() not in self.visited:
+        #    self.visited[board.__hash__()] = board.depth
 
         if depth > maxdepth:
             return
@@ -40,7 +41,8 @@ class dfs:
         for move in moves:
             newState = board.__deepcopy__()
             u.makeMove(newState, move, u.findZero(newState))    #index funkcja (argument to wartosc z listy, w tym przypadku 0)
-            if newState.__hash__() not in self.visited:
+            if ( (newState.__hash__() in self.visited) and (self.visited[newState.__hash__()] < depth)) or newState.__hash__() not in self.visited:
+                self.visited[newState.__hash__()] = board.depth
                 self.solve(newState, depth + 1, maxdepth, move, solution, order)
             if self.found is True:
                 return
