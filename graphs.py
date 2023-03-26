@@ -240,7 +240,15 @@ with open('./data/data.csv', 'rb') as f:
 headlines = ("RuchyOdRozwiazania", "numer_ukladanki", "strategia", "piorytet", "dlugosc_rozw", "odwiedzone", "przetworzone", "max_rekurencja", "czas")
 df = pd.read_csv("./data/data.csv", encoding=enc['encoding'], sep=" ", decimal=".", names=headlines)
 pd.set_option('display.max_columns', None)
-print(df)
-
-
+#print(df)
+df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["dlugosc_rozw"].mean()
+print(df2)
+df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["odwiedzone"].mean()
+print(df2)
+df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["przetworzone"].mean()
+print(df2)
+df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["max_rekurencja"].mean()
+print(df2)
+df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["czas"].mean()
+print(df2)
 
