@@ -54,6 +54,7 @@ class Board:
         for i in range(0,self.w*self.h):
             if self.tab[i]==str(i+1) and self.tab[i]!="0":
                 counter = counter + 1
+        counter +=self.depth
         return counter
 
     def manhattansMetric(self):   #mowi ile kazdy kafelek jest od idealnego polozenia
@@ -64,6 +65,8 @@ class Board:
                 x2,y2 = self.getXYposition(int(self.tab[i])-1)     # to jest pozycja IDEALNA danego elementu w tablicy (board[i] daje nam liczbe, a index
                                                                      # takiej liczby (idealny) powinien byc o 1 wiekszy
                 result = result + abs(x1-x2) + abs(y1-y2)
+
+        result +=self.depth
         return result
 
     def __lt__(self, obj):

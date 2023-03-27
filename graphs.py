@@ -285,4 +285,5 @@ for i in range(0,int(dataFrame.__sizeof__()/9)):
     print(dataFrame[i], '\n')
 
 
+#summaryGraph(dataFrame, 1, "Długość rozwiązania")
 summaryGraph(dataFrame, 1, "Długość rozwiązania")
