@@ -71,19 +71,19 @@ def astarGraph(data, criterion_nr, criterion_name, filename):
     hamm = [0.0]*7
 
     for d in data:
-        if d[0] == 'astr':
-            if d[1] == 'manh':
+        if d[2] == 'astr':
+            if d[3] == 'manh':
                 sum_manh[int(d[0])] += float(d[criterion_nr + 3])
                 sum_manh[0] += 1
                 manh[int(d[0])-1] += 1.0
-            if d[1] == 'hamm':
+            if d[3] == 'hamm':
                 sum_hamm[int(d[0])] += float(d[criterion_nr + 3])
                 sum_hamm[0] += 1
                 hamm[int(d[0])-1] += 1.0
 
     for i in range(0, 7):
-        avg_manh_table[i].append(sum_manh[i + 1] / manh[i])
-        avg_hamm_table[i].append(sum_hamm[i + 1] / hamm[i])
+        avg_manh_table.append(sum_manh[i + 1] / manh[i])
+        avg_hamm_table.append(sum_hamm[i + 1] / hamm[i])
 
     x = [1, 2, 3, 4, 5, 6, 7]
     plt.hist([x, x], weights=[avg_manh_table, avg_hamm_table], label=['Manhattan', 'Hamming'], color=['blue', 'purple'])
@@ -167,21 +167,21 @@ def dfsGraph(data, criterion_nr, criterion_name, filename):
                 ulrd[int(d[0])-1] += 1
 
     for i in range(0, 7):
-        avg_RDUL_table[i] = sum_RDUL[i+1] / rdul[i]
-        avg_RDLU_table[i] = sum_RDLU[i+1] / rdlu[i]
-        avg_DRUL_table[i] = sum_DRUL[i+1] / drul[i]
-        avg_DRLU_table[i] = sum_DRLU[i+1] / drlu[i]
-        avg_LUDR_table[i] = sum_LUDR[i+1] / ludr[i]
-        avg_LURD_table[i] = sum_LURD[i+1] / lurd[i]
-        avg_ULDR_table[i] = sum_ULDR[i+1] / uldr[i]
-        avg_ULRD_table[i] = sum_ULRD[i+1] / ulrd[i]
+        avg_RDUL_table.append(sum_RDUL[i+1] / rdul[i])
+        avg_RDLU_table.append(sum_RDLU[i+1] / rdlu[i])
+        avg_DRUL_table.append(sum_DRUL[i+1] / drul[i])
+        avg_DRLU_table.append(sum_DRLU[i+1] / drlu[i])
+        avg_LUDR_table.append(sum_LUDR[i+1] / ludr[i])
+        avg_LURD_table.append(sum_LURD[i+1] / lurd[i])
+        avg_ULDR_table.append(sum_ULDR[i+1] / uldr[i])
+        avg_ULRD_table.append(sum_ULRD[i+1] / ulrd[i])
 
     x = [1, 2, 3, 4, 5, 6, 7]
     plt.hist([x, x, x, x, x, x, x, x],
              weights=[avg_RDLU_table, avg_RDUL_table, avg_DRUL_table, avg_DRLU_table,
                       avg_LUDR_table, avg_LURD_table, avg_ULDR_table, avg_ULRD_table],
              label=['RDLU', 'RULD', 'DRUL', 'DRLU', 'LUDR', 'LURD', 'ULDR', 'ULRD'],
-             color=['grey', 'purple', 'blue', 'green', 'yelow', 'orange', 'red'])
+             color=['grey', 'purple', 'blue', 'lightblue', 'green', 'yellow', 'orange', 'red'])
     plt.title('DFS')
     plt.xlabel('Głębokość rozwiazania')
     plt.ylabel(criterion_name)
@@ -262,22 +262,21 @@ def bfsGraph(data, criterion_nr, criterion_name, filename):
                 ulrd[int(d[0]) - 1] += 1
 
     for i in range(0, 7):
-        avg_RDUL_table[i] = sum_RDUL[i + 1] / rdul[i]
-        avg_RDLU_table[i] = sum_RDLU[i + 1] / rdlu[i]
-        avg_DRUL_table[i] = sum_DRUL[i + 1] / drul[i]
-        avg_DRLU_table[i] = sum_DRLU[i + 1] / drlu[i]
-        avg_LUDR_table[i] = sum_LUDR[i + 1] / ludr[i]
-        avg_LURD_table[i] = sum_LURD[i + 1] / lurd[i]
-        avg_ULDR_table[i] = sum_ULDR[i + 1] / uldr[i]
-        avg_ULRD_table[i] = sum_ULRD[i + 1] / ulrd[i]
-
+        avg_RDUL_table.append(sum_RDUL[i + 1] / rdul[i])
+        avg_RDLU_table.append(sum_RDLU[i + 1] / rdlu[i])
+        avg_DRUL_table.append(sum_DRUL[i + 1] / drul[i])
+        avg_DRLU_table.append(sum_DRLU[i + 1] / drlu[i])
+        avg_LUDR_table.append(sum_LUDR[i + 1] / ludr[i])
+        avg_LURD_table.append(sum_LURD[i + 1] / lurd[i])
+        avg_ULDR_table.append(sum_ULDR[i + 1] / uldr[i])
+        avg_ULRD_table.append(sum_ULRD[i + 1] / ulrd[i])
 
     x = [1, 2, 3, 4, 5, 6, 7]
     plt.hist([x, x, x, x, x, x, x, x],
              weights=[avg_RDLU_table, avg_RDUL_table, avg_DRUL_table, avg_DRLU_table,
                       avg_LUDR_table, avg_LURD_table, avg_ULDR_table, avg_ULRD_table],
              label=['RDLU', 'RULD', 'DRUL', 'DRLU', 'LUDR', 'LURD', 'ULDR', 'ULRD'],
-             color=['grey', 'purple', 'blue', 'green', 'yelow', 'orange', 'red'])
+             color=['grey', 'purple', 'blue', 'lightblue', 'green', 'yellow', 'orange', 'red'])
     plt.title('BFS')
     plt.xlabel('Głębokość rozwiazania')
     plt.ylabel(criterion_name)
@@ -326,4 +325,27 @@ for i in range(0,int(dataFrame.__sizeof__()/9)):
     print(dataFrame[i], '\n')
 
 
-summaryGraph(dataFrame, 1, "Długość rozwiązania")
+summaryGraph(dataFrame, 1, "Długość rozwiązania", "ogolne_dlugosc_rozwiazania")
+astarGraph(dataFrame, 1, "Długość rozwiązania", "astr_dlugosc_rozwiazania")
+bfsGraph(dataFrame, 1, "Długość rozwiązania", "bfs_dlugosc_rozwiazania")
+dfsGraph(dataFrame, 1, "Długość rozwiązania", "dfs_dlugosc_rozwiazania")
+
+summaryGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "ogolne_odwiedzone")
+astarGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "astr_odwiedzone")
+bfsGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "bfs_odwiedzone")
+dfsGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "dfs_odwiedzone")
+
+summaryGraph(dataFrame, 3, "Liczba stanów przetworzonych", "ogolne_przetworzone")
+astarGraph(dataFrame, 3, "Liczba stanów przetworzonych", "astr_przetworzone")
+bfsGraph(dataFrame, 3, "Liczba stanów przetworzonych", "bfs_przetworzone")
+dfsGraph(dataFrame, 3, "Liczba stanów przetworzonych", "dfs_przetworzone")
+
+summaryGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "ogolne_głębokość")
+astarGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "astr_głębokość")
+bfsGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "bfs_głębokość")
+dfsGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "dfs_głębokość")
+
+summaryGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "ogolne_czas")
+astarGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "astr_czas")
+bfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "bfs_czas")
+dfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "dfs_czas")
