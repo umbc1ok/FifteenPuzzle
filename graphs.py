@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import csv as csv
 
-def summaryGraph(data, criterion_nr, criterion_name):
+
+def summaryGraph(data, criterion_nr, criterion_name, filename):
     plt.clf()
 
     sum_astar = []  # pierwsze dla ilości zliczonych obiektów, reszta to głębokość rozwiązania = index
@@ -51,11 +52,11 @@ def summaryGraph(data, criterion_nr, criterion_name):
     plt.xlabel('Głębokość rozwiazania')
     plt.ylabel(criterion_name)
     #plt.savefig('ogolne_' + criterion_name)
-    plt.savefig('./files/testowy')
-    plt.show()
+    plt.savefig('./graphs/'+filename)
+   # plt.show()
 
 
-def astarGraph(data, criterion_nr, criterion_name):
+def astarGraph(data, criterion_nr, criterion_name, filename):
     plt.clf()
 
     sum_manh = []
@@ -66,28 +67,33 @@ def astarGraph(data, criterion_nr, criterion_name):
     avg_manh_table = []
     avg_hamm_table = []
 
+    manh = [0.0]*7
+    hamm = [0.0]*7
+
     for d in data:
-        if d[0] == 'astar':
-            if d[1] == 'manh':
-                sum_manh[d[2] - 1] += float(d[criterion_nr + 1])
+        if d[2] == 'astr':
+            if d[3] == 'manh':
+                sum_manh[int(d[0])] += float(d[criterion_nr + 3])
                 sum_manh[0] += 1
-            if d[1] == 'hamm':
-                sum_hamm[d[2] - 1] += float(d[criterion_nr + 1])
+                manh[int(d[0])-1] += 1.0
+            if d[3] == 'hamm':
+                sum_hamm[int(d[0])] += float(d[criterion_nr + 3])
                 sum_hamm[0] += 1
+                hamm[int(d[0])-1] += 1.0
 
     for i in range(0, 7):
-        avg_manh_table[i] = sum_manh[i + 1] / sum_manh[0]
-        avg_hamm_table[i] = sum_hamm[i + 1] / sum_hamm[0]
+        avg_manh_table.append(sum_manh[i + 1] / manh[i])
+        avg_hamm_table.append(sum_hamm[i + 1] / hamm[i])
 
     x = [1, 2, 3, 4, 5, 6, 7]
     plt.hist([x, x], weights=[avg_manh_table, avg_hamm_table], label=['Manhattan', 'Hamming'], color=['blue', 'purple'])
     plt.title('A*')
     plt.xlabel('Głębokość rozwiazania')
     plt.ylabel(criterion_name)
-    plt.savefig('astar_' + criterion_name)
+    plt.savefig('./graphs/'+filename)
 
 
-def dfsGraph(data, criterion_nr, criterion_name):
+def dfsGraph(data, criterion_nr, criterion_name, filename):
     plt.clf()
 
     sum_RDUL = []
@@ -116,56 +122,73 @@ def dfsGraph(data, criterion_nr, criterion_name):
     avg_ULDR_table = []
     avg_ULRD_table = []
 
+    rdul = [0.0]*7
+    rdlu = [0.0]*7
+    drul = [0.0]*7
+    drlu = [0.0]*7
+    ludr = [0.0]*7
+    lurd = [0.0]*7
+    uldr = [0.0]*7
+    ulrd = [0.0]*7
+
     for d in data:
-        if d[0] == 'dfs':
-            if d[1] == 'RDUL':
-                sum_RDUL[d[2] - 1] += float(d[criterion_nr + 1])
+        if d[2] == 'dfs':
+            if d[3] == 'rdul':
+                sum_RDUL[int(d[0])] += float(d[criterion_nr + 3])
                 sum_RDUL[0] += 1
-            if d[1] == 'RDLU':
-                sum_RDLU[d[2] - 1] += float(d[criterion_nr + 1])
+                rdul[int(d[0])-1] += 1
+            if d[3] == 'rdlu':
+                sum_RDLU[int(d[0])] += float(d[criterion_nr + 3])
                 sum_RDLU[0] += 1
-            if d[1] == 'DRUL':
-                sum_DRUL[d[2] - 1] += float(d[criterion_nr + 1])
+                rdlu[int(d[0])-1] += 1
+            if d[3] == 'drul':
+                sum_DRUL[int(d[0])] += float(d[criterion_nr + 3])
                 sum_DRUL[0] += 1
-            if d[1] == 'DRLU':
-                sum_DRLU[d[2] - 1] += float(d[criterion_nr + 1])
+                drul[int(d[0])-1] += 1
+            if d[3] == 'drlu':
+                sum_DRLU[int(d[0])] += float(d[criterion_nr + 3])
                 sum_DRLU[0] += 1
-            if d[1] == 'LUDR':
-                sum_LUDR[d[2] - 1] += float(d[criterion_nr + 1])
+                drlu[int(d[0])-1] += 1
+            if d[3] == 'ludr':
+                sum_LUDR[int(d[0])] += float(d[criterion_nr + 3])
                 sum_LUDR[0] += 1
-            if d[1] == 'LURD':
-                sum_LURD[d[2] - 1] += float(d[criterion_nr + 1])
+                ludr[int(d[0])-1] += 1
+            if d[3] == 'ludr':
+                sum_LURD[int(d[0])] += float(d[criterion_nr + 3])
                 sum_LURD[0] += 1
-            if d[1] == 'ULDR':
-                sum_ULDR[d[2] - 1] += float(d[criterion_nr + 1])
+                lurd[int(d[0])-1] += 1
+            if d[3] == 'uldr':
+                sum_ULDR[int(d[0])] += float(d[criterion_nr + 3])
                 sum_ULDR[0] += 1
-            if d[1] == 'ULRD':
-                sum_ULRD[d[2] - 1] += float(d[criterion_nr + 1])
+                uldr[int(d[0])-1] += 1
+            if d[3] == 'ulrd':
+                sum_ULRD[int(d[0])] += float(d[criterion_nr + 3])
                 sum_ULRD[0] += 1
+                ulrd[int(d[0])-1] += 1
 
     for i in range(0, 7):
-        avg_RDUL_table[i] = sum_RDUL[i+1] / sum_RDLU[0]
-        avg_RDLU_table[i] = sum_RDLU[i+1] / sum_RDLU[0]
-        avg_DRUL_table[i] = sum_DRUL[i+1] / sum_DRUL[0]
-        avg_DRLU_table[i] = sum_DRLU[i+1] / sum_DRLU[0]
-        avg_LUDR_table[i] = sum_LUDR[i+1] / sum_LUDR[0]
-        avg_LURD_table[i] = sum_LURD[i+1] / sum_LURD[0]
-        avg_ULDR_table[i] = sum_ULDR[i+1] / sum_ULDR[0]
-        avg_ULRD_table[i] = sum_ULRD[i+1] / sum_ULRD[0]
+        avg_RDUL_table.append(sum_RDUL[i+1] / rdul[i])
+        avg_RDLU_table.append(sum_RDLU[i+1] / rdlu[i])
+        avg_DRUL_table.append(sum_DRUL[i+1] / drul[i])
+        avg_DRLU_table.append(sum_DRLU[i+1] / drlu[i])
+        avg_LUDR_table.append(sum_LUDR[i+1] / ludr[i])
+        avg_LURD_table.append(sum_LURD[i+1] / lurd[i])
+        avg_ULDR_table.append(sum_ULDR[i+1] / uldr[i])
+        avg_ULRD_table.append(sum_ULRD[i+1] / ulrd[i])
 
     x = [1, 2, 3, 4, 5, 6, 7]
     plt.hist([x, x, x, x, x, x, x, x],
              weights=[avg_RDLU_table, avg_RDUL_table, avg_DRUL_table, avg_DRLU_table,
                       avg_LUDR_table, avg_LURD_table, avg_ULDR_table, avg_ULRD_table],
              label=['RDLU', 'RULD', 'DRUL', 'DRLU', 'LUDR', 'LURD', 'ULDR', 'ULRD'],
-             color=['grey', 'purple', 'blue', 'green', 'yelow', 'orange', 'red'])
+             color=['grey', 'purple', 'blue', 'lightblue', 'green', 'yellow', 'orange', 'red'])
     plt.title('DFS')
     plt.xlabel('Głębokość rozwiazania')
     plt.ylabel(criterion_name)
-    plt.savefig('dfs_' + criterion_name)
+    plt.savefig('./graphs/'+filename)
 
 
-def bfsGraph(data, criterion_nr, criterion_name):
+def bfsGraph(data, criterion_nr, criterion_name, filename):
     plt.clf()
 
     sum_RDUL = []
@@ -194,53 +217,70 @@ def bfsGraph(data, criterion_nr, criterion_name):
     avg_ULDR_table = []
     avg_ULRD_table = []
 
+    rdul = [0.0] * 7
+    rdlu = [0.0] * 7
+    drul = [0.0] * 7
+    drlu = [0.0] * 7
+    ludr = [0.0] * 7
+    lurd = [0.0] * 7
+    uldr = [0.0] * 7
+    ulrd = [0.0] * 7
+
     for d in data:
-        if d[0] == 'bfs':
-            if d[1] == 'RDUL':
-                sum_RDUL[d[2] - 1] += float(d[criterion_nr + 1])
+        if d[2] == 'dfs':
+            if d[3] == 'rdul':
+                sum_RDUL[int(d[0])] += float(d[criterion_nr + 3])
                 sum_RDUL[0] += 1
-            if d[1] == 'RDLU':
-                sum_RDLU[d[2] - 1] += float(d[criterion_nr + 1])
+                rdul[int(d[0]) - 1] += 1
+            if d[3] == 'rdlu':
+                sum_RDLU[int(d[0])] += float(d[criterion_nr + 3])
                 sum_RDLU[0] += 1
-            if d[1] == 'DRUL':
-                sum_DRUL[d[2] - 1] += float(d[criterion_nr + 1])
+                rdlu[int(d[0]) - 1] += 1
+            if d[3] == 'drul':
+                sum_DRUL[int(d[0])] += float(d[criterion_nr + 3])
                 sum_DRUL[0] += 1
-            if d[1] == 'DRLU':
-                sum_DRLU[d[2] - 1] += float(d[criterion_nr + 1])
+                drul[int(d[0]) - 1] += 1
+            if d[3] == 'drlu':
+                sum_DRLU[int(d[0])] += float(d[criterion_nr + 3])
                 sum_DRLU[0] += 1
-            if d[1] == 'LUDR':
-                sum_LUDR[d[2] - 1] += float(d[criterion_nr + 1])
+                drlu[int(d[0]) - 1] += 1
+            if d[3] == 'ludr':
+                sum_LUDR[int(d[0])] += float(d[criterion_nr + 3])
                 sum_LUDR[0] += 1
-            if d[1] == 'LURD':
-                sum_LURD[d[2] - 1] += float(d[criterion_nr + 1])
+                ludr[int(d[0]) - 1] += 1
+            if d[3] == 'ludr':
+                sum_LURD[int(d[0])] += float(d[criterion_nr + 3])
                 sum_LURD[0] += 1
-            if d[1] == 'ULDR':
-                sum_ULDR[d[2] - 1] += float(d[criterion_nr + 1])
+                lurd[int(d[0]) - 1] += 1
+            if d[3] == 'uldr':
+                sum_ULDR[int(d[0])] += float(d[criterion_nr + 3])
                 sum_ULDR[0] += 1
-            if d[1] == 'ULRD':
-                sum_ULRD[d[2] - 1] += float(d[criterion_nr + 1])
+                uldr[int(d[0]) - 1] += 1
+            if d[3] == 'ulrd':
+                sum_ULRD[int(d[0])] += float(d[criterion_nr + 3])
                 sum_ULRD[0] += 1
+                ulrd[int(d[0]) - 1] += 1
 
     for i in range(0, 7):
-        avg_RDUL_table[i] = sum_RDUL[i + 1] / sum_RDLU[0]
-        avg_RDLU_table[i] = sum_RDLU[i + 1] / sum_RDLU[0]
-        avg_DRUL_table[i] = sum_DRUL[i + 1] / sum_DRUL[0]
-        avg_DRLU_table[i] = sum_DRLU[i + 1] / sum_DRLU[0]
-        avg_LUDR_table[i] = sum_LUDR[i + 1] / sum_LUDR[0]
-        avg_LURD_table[i] = sum_LURD[i + 1] / sum_LURD[0]
-        avg_ULDR_table[i] = sum_ULDR[i + 1] / sum_ULDR[0]
-        avg_ULRD_table[i] = sum_ULRD[i + 1] / sum_ULRD[0]
+        avg_RDUL_table.append(sum_RDUL[i + 1] / rdul[i])
+        avg_RDLU_table.append(sum_RDLU[i + 1] / rdlu[i])
+        avg_DRUL_table.append(sum_DRUL[i + 1] / drul[i])
+        avg_DRLU_table.append(sum_DRLU[i + 1] / drlu[i])
+        avg_LUDR_table.append(sum_LUDR[i + 1] / ludr[i])
+        avg_LURD_table.append(sum_LURD[i + 1] / lurd[i])
+        avg_ULDR_table.append(sum_ULDR[i + 1] / uldr[i])
+        avg_ULRD_table.append(sum_ULRD[i + 1] / ulrd[i])
 
     x = [1, 2, 3, 4, 5, 6, 7]
     plt.hist([x, x, x, x, x, x, x, x],
              weights=[avg_RDLU_table, avg_RDUL_table, avg_DRUL_table, avg_DRLU_table,
                       avg_LUDR_table, avg_LURD_table, avg_ULDR_table, avg_ULRD_table],
              label=['RDLU', 'RULD', 'DRUL', 'DRLU', 'LUDR', 'LURD', 'ULDR', 'ULRD'],
-             color=['grey', 'purple', 'blue', 'green', 'yelow', 'orange', 'red'])
+             color=['grey', 'purple', 'blue', 'lightblue', 'green', 'yellow', 'orange', 'red'])
     plt.title('BFS')
     plt.xlabel('Głębokość rozwiazania')
     plt.ylabel(criterion_name)
-    plt.savefig('bfs_' + criterion_name)
+    plt.savefig('./graphs/'+filename)
 
 
 # method, order/heuristic, solution length, amount visited, amount processed, max depth, execution time
@@ -285,5 +325,29 @@ for i in range(0,int(dataFrame.__sizeof__()/9)):
     print(dataFrame[i], '\n')
 
 
-#summaryGraph(dataFrame, 1, "Długość rozwiązania")
-summaryGraph(dataFrame, 1, "Długość rozwiązania")
+
+summaryGraph(dataFrame, 1, "Długość rozwiązania", "ogolne_dlugosc_rozwiazania")
+astarGraph(dataFrame, 1, "Długość rozwiązania", "astr_dlugosc_rozwiazania")
+bfsGraph(dataFrame, 1, "Długość rozwiązania", "bfs_dlugosc_rozwiazania")
+dfsGraph(dataFrame, 1, "Długość rozwiązania", "dfs_dlugosc_rozwiazania")
+
+summaryGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "ogolne_odwiedzone")
+astarGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "astr_odwiedzone")
+bfsGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "bfs_odwiedzone")
+dfsGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "dfs_odwiedzone")
+
+summaryGraph(dataFrame, 3, "Liczba stanów przetworzonych", "ogolne_przetworzone")
+astarGraph(dataFrame, 3, "Liczba stanów przetworzonych", "astr_przetworzone")
+bfsGraph(dataFrame, 3, "Liczba stanów przetworzonych", "bfs_przetworzone")
+dfsGraph(dataFrame, 3, "Liczba stanów przetworzonych", "dfs_przetworzone")
+
+summaryGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "ogolne_głębokość")
+astarGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "astr_głębokość")
+bfsGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "bfs_głębokość")
+dfsGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "dfs_głębokość")
+
+summaryGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "ogolne_czas")
+astarGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "astr_czas")
+bfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "bfs_czas")
+dfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "dfs_czas")
+
