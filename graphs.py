@@ -3,6 +3,7 @@ from _csv import reader
 import chardet as chardet
 import matplotlib.pyplot as plt
 import pandas as pd
+import csv as csv
 
 def summaryGraph(data, criterion_nr, criterion_name):
     plt.clf()
@@ -234,21 +235,43 @@ def bfsGraph(data, criterion_nr, criterion_name):
 
 # method, order/heuristic, solution length, amount visited, amount processed, max depth, execution time
 
+# with open('./data/data.csv', 'rb') as f:
+#     enc = chardet.detect(f.read())
+# #contents = f.read()
+# headlines = ("RuchyOdRozwiazania", "numer_ukladanki", "strategia", "piorytet", "dlugosc_rozw", "odwiedzone", "przetworzone", "max_rekurencja", "czas")
+# df = pd.read_csv("./data/data.csv", encoding=enc['encoding'], sep=" ", decimal=".", names=headlines)
+# pd.set_option('display.max_columns', None)
+# #print(df)
+# df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["dlugosc_rozw"].mean()
+# print(df2)
+# df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["odwiedzone"].mean()
+# print(df2)
+# df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["przetworzone"].mean()
+# print(df2)
+# df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["max_rekurencja"].max()
+# print(df2)
+# df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["czas"].mean()
+# print(df2)
+
+
 with open('./data/data.csv', 'rb') as f:
     enc = chardet.detect(f.read())
-#contents = f.read()
-headlines = ("RuchyOdRozwiazania", "numer_ukladanki", "strategia", "piorytet", "dlugosc_rozw", "odwiedzone", "przetworzone", "max_rekurencja", "czas")
-df = pd.read_csv("./data/data.csv", encoding=enc['encoding'], sep=" ", decimal=".", names=headlines)
-pd.set_option('display.max_columns', None)
-#print(df)
-df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["dlugosc_rozw"].mean()
-print(df2)
-df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["odwiedzone"].mean()
-print(df2)
-df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["przetworzone"].mean()
-print(df2)
-df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["max_rekurencja"].mean()
-print(df2)
-df2 = df.groupby(["RuchyOdRozwiazania","strategia"])["czas"].mean()
-print(df2)
+
+with open("./data/data.csv", 'r', encoding=enc['encoding']) as csvfile:
+    # Stwórz czytnik csv
+    dataFrame = list()
+    i=0
+    for line in csvfile.readlines():
+        array = line.split()
+        dataFrame.append(array)
+
+        i += 1
+        #list.append(array)
+
+    #print(dataFrame)
+
+# Wyświetl tablicę_dwuwymiarową
+for i in range(0,int(dataFrame.__sizeof__()/9)):
+    print(dataFrame[i], '\n')
+
 
