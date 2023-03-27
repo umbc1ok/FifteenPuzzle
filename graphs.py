@@ -12,23 +12,23 @@ def summaryGraph(data, criterion_nr, criterion_name):
     sum_bfs = []
     sum_dfs = []
     for i in range(0, 8):
-        sum_astar[i] = 0.0
-        sum_bfs[i] = 0.0
-        sum_dfs[i] = 0.0
+        sum_astar.append(0.0)
+        sum_bfs.append(0.0)
+        sum_dfs.append(0.0)
     avg_astar_table = []
     avg_bfs_table = []
     avg_dfs_table = []
 
     for d in data:
-        if d[0] == 'astar':
-            sum_astar[d[2] - 1] += float(d[criterion_nr + 1])
+        if d[2] == 'astar':
+            sum_astar[d[0]] += float(d[criterion_nr + 3])
             # indeks kryterium bo kryteria zaczynają się od data[2] a kryteria numerujemy od 1
             sum_astar[0] += 1
-        if d[0] == 'bfs':
-            sum_bfs[d[2] - 1] += float(d[criterion_nr + 1])
+        if d[2] == 'bfs':
+            sum_bfs[d[0]] += float(d[criterion_nr + 3])
             sum_bfs[0] += 1
-        if d[0] == 'dfs':
-            sum_dfs[d[2] - 1] += float(d[criterion_nr + 1])
+        if d[2] == 'dfs':
+            sum_dfs[d[0]] += float(d[criterion_nr + 3])
             sum_dfs[0] += 1
 
     for i in range(0, 7):
@@ -42,7 +42,9 @@ def summaryGraph(data, criterion_nr, criterion_name):
     plt.title('Ogólne')
     plt.xlabel('Głębokość rozwiazania')
     plt.ylabel(criterion_name)
-    plt.savefig('ogolne_' + criterion_name)
+    #plt.savefig('ogolne_' + criterion_name)
+    plt.savefig('./files/testowy')
+    plt.show()
 
 
 def astarGraph(data, criterion_nr, criterion_name):
@@ -51,8 +53,8 @@ def astarGraph(data, criterion_nr, criterion_name):
     sum_manh = []
     sum_hamm = []
     for i in range(0, 8):
-        sum_manh[i] = 0.0
-        sum_hamm[i] = 0.0
+        sum_manh.append(0.0)
+        sum_hamm.append(0.0)
     avg_manh_table = []
     avg_hamm_table = []
 
@@ -89,14 +91,14 @@ def dfsGraph(data, criterion_nr, criterion_name):
     sum_ULDR = []
     sum_ULRD = []
     for i in range(0, 8):
-        sum_RDUL[i] = 0.0
-        sum_RDLU[i] = 0.0
-        sum_DRUL[i] = 0.0
-        sum_DRLU[i] = 0.0
-        sum_LUDR[i] = 0.0
-        sum_LURD[i] = 0.0
-        sum_ULDR[i] = 0.0
-        sum_ULRD[i] = 0.0
+        sum_RDUL.append(0.0)
+        sum_RDLU.append(0.0)
+        sum_DRUL.append(0.0)
+        sum_DRLU.append(0.0)
+        sum_LUDR.append(0.0)
+        sum_LURD.append(0.0)
+        sum_ULDR.append(0.0)
+        sum_ULRD.append(0.0)
     avg_RDUL_table = []
     avg_RDLU_table = []
     avg_DRUL_table = []
@@ -167,14 +169,14 @@ def bfsGraph(data, criterion_nr, criterion_name):
     sum_ULDR = []
     sum_ULRD = []
     for i in range(0, 8):
-        sum_RDUL[i] = 0.0
-        sum_RDLU[i] = 0.0
-        sum_DRUL[i] = 0.0
-        sum_DRLU[i] = 0.0
-        sum_LUDR[i] = 0.0
-        sum_LURD[i] = 0.0
-        sum_ULDR[i] = 0.0
-        sum_ULRD[i] = 0.0
+        sum_RDUL.append(0.0)
+        sum_RDLU.append(0.0)
+        sum_DRUL.append(0.0)
+        sum_DRLU.append(0.0)
+        sum_LUDR.append(0.0)
+        sum_LURD.append(0.0)
+        sum_ULDR.append(0.0)
+        sum_ULRD.append(0.0)
     avg_RDUL_table = []
     avg_RDLU_table = []
     avg_DRUL_table = []
