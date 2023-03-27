@@ -6,7 +6,7 @@ import pandas as pd
 import csv as csv
 
 
-def summaryGraph(data, criterion_nr, criterion_name, filename):
+def summaryGraph(data, criterion_nr, criterion_name, filename, strange_numbers):
     plt.clf()
 
     sum_astar = []  # pierwsze dla ilości zliczonych obiektów, reszta to głębokość rozwiązania = index
@@ -47,16 +47,19 @@ def summaryGraph(data, criterion_nr, criterion_name, filename):
 
     x = [1, 2, 3, 4, 5, 6, 7]
     plt.hist([x, x, x], weights=[avg_astar_table, avg_bfs_table, avg_dfs_table], label=['A*', 'BFS', 'DFS'],
-             color=['blue', 'purple', 'green'])
+             color=['blue', 'purple', 'green'], bins=[0.5, 1.5, 2.5, 3.6, 4.5, 5.5, 6.5, 7.5])
     plt.title('Ogólne')
     plt.xlabel('Głębokość rozwiazania')
     plt.ylabel(criterion_name)
+    plt.legend(('A*', 'BFS', 'DFS'), loc='upper left')
+    if strange_numbers is True:
+        plt.yscale("log")
     #plt.savefig('ogolne_' + criterion_name)
     plt.savefig('./graphs/'+filename)
-   # plt.show()
+    plt.show()
 
 
-def astarGraph(data, criterion_nr, criterion_name, filename):
+def astarGraph(data, criterion_nr, criterion_name, filename, strange_numbers):
     plt.clf()
 
     sum_manh = []
@@ -86,14 +89,19 @@ def astarGraph(data, criterion_nr, criterion_name, filename):
         avg_hamm_table.append(sum_hamm[i + 1] / hamm[i])
 
     x = [1, 2, 3, 4, 5, 6, 7]
-    plt.hist([x, x], weights=[avg_manh_table, avg_hamm_table], label=['Manhattan', 'Hamming'], color=['blue', 'purple'])
+    plt.hist([x, x], weights=[avg_manh_table, avg_hamm_table], label=['Manhattan', 'Hamming'], color=['blue', 'purple'],
+             bins=[0.5, 1.5, 2.5, 3.6, 4.5, 5.5, 6.5, 7.5])
     plt.title('A*')
     plt.xlabel('Głębokość rozwiazania')
     plt.ylabel(criterion_name)
+    plt.legend(('Manhattan', 'Hamming'), loc='upper left')
+    if strange_numbers is True:
+        plt.yscale("log")
     plt.savefig('./graphs/'+filename)
+    plt.show()
 
 
-def dfsGraph(data, criterion_nr, criterion_name, filename):
+def dfsGraph(data, criterion_nr, criterion_name, filename, strange_numbers):
     plt.clf()
 
     sum_RDUL = []
@@ -181,14 +189,19 @@ def dfsGraph(data, criterion_nr, criterion_name, filename):
              weights=[avg_RDLU_table, avg_RDUL_table, avg_DRUL_table, avg_DRLU_table,
                       avg_LUDR_table, avg_LURD_table, avg_ULDR_table, avg_ULRD_table],
              label=['RDLU', 'RULD', 'DRUL', 'DRLU', 'LUDR', 'LURD', 'ULDR', 'ULRD'],
-             color=['grey', 'purple', 'blue', 'lightblue', 'green', 'yellow', 'orange', 'red'])
+             color=['grey', 'purple', 'blue', 'lightblue', 'green', 'yellow', 'orange', 'red'],
+             bins=[0.5, 1.5, 2.5, 3.6, 4.5, 5.5, 6.5, 7.5])
     plt.title('DFS')
     plt.xlabel('Głębokość rozwiazania')
     plt.ylabel(criterion_name)
+    plt.legend(('RDLU', 'RULD', 'DRUL', 'DRLU', 'LUDR', 'LURD', 'ULDR', 'ULRD'), loc='upper left')
+    if strange_numbers is True:
+        plt.yscale("log")
     plt.savefig('./graphs/'+filename)
+    plt.show()
 
 
-def bfsGraph(data, criterion_nr, criterion_name, filename):
+def bfsGraph(data, criterion_nr, criterion_name, filename, strange_numbers):
     plt.clf()
 
     sum_RDUL = []
@@ -227,7 +240,7 @@ def bfsGraph(data, criterion_nr, criterion_name, filename):
     ulrd = [0.0] * 7
 
     for d in data:
-        if d[2] == 'dfs':
+        if d[2] == 'bfs':
             if d[3] == 'rdul':
                 sum_RDUL[int(d[0])] += float(d[criterion_nr + 3])
                 sum_RDUL[0] += 1
@@ -276,11 +289,16 @@ def bfsGraph(data, criterion_nr, criterion_name, filename):
              weights=[avg_RDLU_table, avg_RDUL_table, avg_DRUL_table, avg_DRLU_table,
                       avg_LUDR_table, avg_LURD_table, avg_ULDR_table, avg_ULRD_table],
              label=['RDLU', 'RULD', 'DRUL', 'DRLU', 'LUDR', 'LURD', 'ULDR', 'ULRD'],
-             color=['grey', 'purple', 'blue', 'lightblue', 'green', 'yellow', 'orange', 'red'])
+             color=['grey', 'purple', 'blue', 'lightblue', 'green', 'yellow', 'orange', 'red'],
+             bins=[0.5, 1.5, 2.5, 3.6, 4.5, 5.5, 6.5, 7.5])
     plt.title('BFS')
     plt.xlabel('Głębokość rozwiazania')
     plt.ylabel(criterion_name)
+    plt.legend(('RDLU', 'RULD', 'DRUL', 'DRLU', 'LUDR', 'LURD', 'ULDR', 'ULRD'), loc='upper left')
+    if strange_numbers is True:
+        plt.yscale("log")
     plt.savefig('./graphs/'+filename)
+    plt.show()
 
 
 # method, order/heuristic, solution length, amount visited, amount processed, max depth, execution time
@@ -326,28 +344,28 @@ for i in range(0,int(dataFrame.__sizeof__()/9)):
 
 
 
-summaryGraph(dataFrame, 1, "Długość rozwiązania", "ogolne_dlugosc_rozwiazania")
-astarGraph(dataFrame, 1, "Długość rozwiązania", "astr_dlugosc_rozwiazania")
-bfsGraph(dataFrame, 1, "Długość rozwiązania", "bfs_dlugosc_rozwiazania")
-dfsGraph(dataFrame, 1, "Długość rozwiązania", "dfs_dlugosc_rozwiazania")
+summaryGraph(dataFrame, 1, "Długość rozwiązania", "ogolne_dlugosc_rozwiazania", False)
+astarGraph(dataFrame, 1, "Długość rozwiązania", "astr_dlugosc_rozwiazania", False)
+bfsGraph(dataFrame, 1, "Długość rozwiązania", "bfs_dlugosc_rozwiazania", False)
+dfsGraph(dataFrame, 1, "Długość rozwiązania", "dfs_dlugosc_rozwiazania", False)
 
-summaryGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "ogolne_odwiedzone")
-astarGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "astr_odwiedzone")
-bfsGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "bfs_odwiedzone")
-dfsGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "dfs_odwiedzone")
+summaryGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "ogolne_odwiedzone", True)
+astarGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "astr_odwiedzone", False)
+bfsGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "bfs_odwiedzone", False)
+dfsGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "dfs_odwiedzone", False)
 
-summaryGraph(dataFrame, 3, "Liczba stanów przetworzonych", "ogolne_przetworzone")
-astarGraph(dataFrame, 3, "Liczba stanów przetworzonych", "astr_przetworzone")
-bfsGraph(dataFrame, 3, "Liczba stanów przetworzonych", "bfs_przetworzone")
-dfsGraph(dataFrame, 3, "Liczba stanów przetworzonych", "dfs_przetworzone")
+summaryGraph(dataFrame, 3, "Liczba stanów przetworzonych", "ogolne_przetworzone", True)
+astarGraph(dataFrame, 3, "Liczba stanów przetworzonych", "astr_przetworzone", False)
+bfsGraph(dataFrame, 3, "Liczba stanów przetworzonych", "bfs_przetworzone", False)
+dfsGraph(dataFrame, 3, "Liczba stanów przetworzonych", "dfs_przetworzone", False)
 
-summaryGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "ogolne_głębokość")
-astarGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "astr_głębokość")
-bfsGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "bfs_głębokość")
-dfsGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "dfs_głębokość")
+summaryGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "ogolne_głębokość", False)
+astarGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "astr_głębokość", False)
+bfsGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "bfs_głębokość", False)
+dfsGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "dfs_głębokość", False)
 
-summaryGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "ogolne_czas")
-astarGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "astr_czas")
-bfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "bfs_czas")
-dfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "dfs_czas")
+summaryGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "ogolne_czas", True)
+astarGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "astr_czas", False)
+bfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "bfs_czas", False)
+dfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "dfs_czas", False)
 
