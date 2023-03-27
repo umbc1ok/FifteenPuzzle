@@ -19,22 +19,30 @@ def summaryGraph(data, criterion_nr, criterion_name):
     avg_bfs_table = []
     avg_dfs_table = []
 
+    astar = [0.0]*7
+    bfs = [0.0]*7
+    dfs = [0.0]*7
+
     for d in data:
-        if d[2] == 'astar':
-            sum_astar[d[0]] += float(d[criterion_nr + 3])
+        print(d[2])
+        if d[2] == 'astr':
+            sum_astar[int(d[0])] += float(d[criterion_nr + 3])
             # indeks kryterium bo kryteria zaczynają się od data[2] a kryteria numerujemy od 1
-            sum_astar[0] += 1
+            sum_astar[0] = sum_astar[0] + 1.0
+            astar[int(d[0])-1] += 1.0
         if d[2] == 'bfs':
-            sum_bfs[d[0]] += float(d[criterion_nr + 3])
-            sum_bfs[0] += 1
+            sum_bfs[int(d[0])] += float(d[criterion_nr + 3])
+            sum_bfs[0] = sum_bfs[0] + 1.0
+            bfs[int(d[0])-1] += 1.0
         if d[2] == 'dfs':
-            sum_dfs[d[0]] += float(d[criterion_nr + 3])
-            sum_dfs[0] += 1
+            sum_dfs[int(d[0])] += float(d[criterion_nr + 3])
+            sum_dfs[0] = sum_dfs[0] + 1.0
+            dfs[int(d[0])-1] += 1.0
 
     for i in range(0, 7):
-        avg_astar_table[i] = sum_astar[i + 1] / sum_astar[0]
-        avg_bfs_table[i] = sum_bfs[i + 1] / sum_bfs[0]
-        avg_dfs_table[i] = sum_dfs[i + 1] / sum_dfs[0]
+        avg_astar_table.append(sum_astar[i + 1] / astar[i])
+        avg_bfs_table.append(sum_bfs[i + 1] / bfs[i])
+        avg_dfs_table.append(sum_dfs[i + 1] / dfs[i])
 
     x = [1, 2, 3, 4, 5, 6, 7]
     plt.hist([x, x, x], weights=[avg_astar_table, avg_bfs_table, avg_dfs_table], label=['A*', 'BFS', 'DFS'],
@@ -277,3 +285,4 @@ for i in range(0,int(dataFrame.__sizeof__()/9)):
     print(dataFrame[i], '\n')
 
 
+summaryGraph(dataFrame, 1, "Długość rozwiązania")
