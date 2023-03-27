@@ -30,7 +30,7 @@ class astar:
         if board.checkBoard() is True:
             self.found = True
             self.solution = board.solution
-            return solution
+            return self.solution
 
 
 
@@ -38,13 +38,14 @@ class astar:
         self.counter = self.counter + len(moves)
         for move in moves:
             newState = board.__deepcopy__()
-            newState.depth = newState.depth+1
+            newState.depth +=1
             ut.makeMove(newState,move,ut.findZero(newState))
             if newState.__hash__() not in self.visited:
                 self.boards.append(newState)
 
         self.boards.sort()
         bestState = self.boards.pop(0)
+        #print(bestState.depth)
         self.solve(bestState, bestState.lastmove, solution)
         return
 

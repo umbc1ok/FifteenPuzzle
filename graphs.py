@@ -325,6 +325,7 @@ for i in range(0,int(dataFrame.__sizeof__()/9)):
     print(dataFrame[i], '\n')
 
 
+
 summaryGraph(dataFrame, 1, "Długość rozwiązania", "ogolne_dlugosc_rozwiazania")
 astarGraph(dataFrame, 1, "Długość rozwiązania", "astr_dlugosc_rozwiazania")
 bfsGraph(dataFrame, 1, "Długość rozwiązania", "bfs_dlugosc_rozwiazania")
@@ -349,3 +350,4 @@ summaryGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "ogolne_czas")
 astarGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "astr_czas")
 bfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "bfs_czas")
 dfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "dfs_czas")
+

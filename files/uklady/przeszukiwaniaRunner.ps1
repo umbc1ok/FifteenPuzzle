@@ -1,5 +1,5 @@
-$validStrategies = "bfs"
-$validParams = "RDUL","RDLU","DRUL","DRLU","LUDR","LURD","ULDR","ULRD"
+$validStrategies = "astr"
+$validParams = "manh","hamm"
 
 foreach ($strategy in $validStrategies) {
     foreach ($param in $validParams) {

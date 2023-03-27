@@ -38,7 +38,7 @@ elif algorithmType == "dfs":
     solvingTime = solvingTime / 1000000
     saver.saveToFile(solver.found, solutionFilePath, statsFilePath, solver.solution,  solver.counter, solver.visited.__len__(), solver.reachedDepth, solvingTime)
 elif algorithmType == "astr":
-    solver = astar.astar(moveSequence)
+    solver = astar.astar(moveSequence)      #movesequence to hamm lub manh
     board.metric = solver.metric
     solvingStartTime = time.time_ns()
     solutionSequence = solver.solve(board,"","")
