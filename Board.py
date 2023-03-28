@@ -55,7 +55,6 @@ class Board:
             if self.tab[i]!=str(i+1) and self.tab[i]!="0":
                 counter = counter + 1
         counter += self.depth
-        #print(self.depth)
         self.cost = counter
         return counter
 
