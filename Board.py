@@ -11,6 +11,7 @@ class Board:
         self.solution = ""
         self.metric = "hamm"
         self.depth = 0
+        self.cost = 0
 
     def testprint(self):
         i = 0
@@ -25,11 +26,9 @@ class Board:
     def checkBoard(self):
         size = self.w * self.h
         if int(self.tab[size - 1]) != 0:
-            #print("checking last place")
             return False
         for i in range(0, size - 2):
             if int(self.tab[i]) != i + 1:
-                #print("something at wrong place")
                 return False
         return True
     def getXYposition(self,index):
@@ -44,6 +43,7 @@ class Board:
         new = Board(self.w, self.h, tabcopy)
         new.solution = copy.deepcopy(self.solution)
         new.depth = copy.deepcopy(self.depth)
+        new.metric = copy.deepcopy(self.metric)
         return new
 
     def __hash__(self):
@@ -52,10 +52,10 @@ class Board:
     def hammingsMetric(self):  #mowi ile kafelkow jest na swoim miejscu
         counter = 0
         for i in range(0,self.w*self.h):
-            if self.tab[i]==str(i+1) and self.tab[i]!="0":
+            if self.tab[i]!=str(i+1) and self.tab[i]!="0":
                 counter = counter + 1
-        counter -= self.depth
-        #print(self.depth)
+        counter += self.depth
+        self.cost = counter
         return counter
 
     def manhattansMetric(self):   #mowi ile kazdy kafelek jest od idealnego polozenia
@@ -67,12 +67,12 @@ class Board:
                                                                      # takiej liczby (idealny) powinien byc o 1 wiekszy
                 result = result + abs(x1-x2) + abs(y1-y2)
 
-        result -= self.depth
-        #print(self.depth)
+        result += self.depth
+        self.cost = result
         return result
 
     def __lt__(self, obj):
         if self.metric == "hamm":
-            return self.hammingsMetric() > (obj.hammingsMetric())
+            return self.hammingsMetric() < (obj.hammingsMetric())
         else:
-            return self.manhattansMetric() > obj.manhattansMetric()
+            return self.manhattansMetric() < obj.manhattansMetric()
