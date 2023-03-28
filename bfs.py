@@ -1,23 +1,18 @@
-import time
-
-import Board
-import reader
-import saver
 import utilities as u
 
 
 class bfs:
 
     def __init__(self):
-        self.counter = 1        #odwiedzone
+        self.visitedStates = 1        #odwiedzone
         self.reachedDepth = 0
         self.found = False
-        self.visited = set()    #przetworzone
+        self.processedStates = set()    #przetworzone
         self.queue = []
         self.solution = ""
 
     def solve(self, board, order):
-        self.visited.add(board.__hash__())
+        self.processedStates.add(board.__hash__())
 
         if len(self.queue) > 0:
             self.queue.pop(0)
@@ -38,13 +33,13 @@ class bfs:
 
 
         moves = u.next_in_order(order, board)
-        self.counter = self.counter + len(moves)
+        self.visitedStates = self.visitedStates + len(moves)
         for move in moves:
             newState = board.__deepcopy__()
             u.makeMove(newState, move,
                        u.findZero(newState))  # index funkcja (argument to wartosc z listy, w tym przypadku 0)
             newState.lastmove = move
-            if newState.__hash__() not in self.visited:
+            if newState.__hash__() not in self.processedStates:
                 self.queue.append(newState)
         if self.found is False:
             self.solve(self.queue[0], order)

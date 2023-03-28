@@ -1,16 +1,13 @@
-import Board
-import reader
-import saver
 import utilities as ut
-import time
+
 
 class astar:
 
     def __init__(self,metric):
-        self.counter = 1        #odwiedzone
+        self.visitedStates = 1        #odwiedzone
         self.reachedDepth = 0
         self.found = False
-        self.visited = set()    #przetworzone
+        self.processedStates = set()    #przetworzone
         self.metric = metric
         self.boards = list()
         self.solution = ''
@@ -20,7 +17,7 @@ class astar:
 
 
     def solve(self,board, lastmove, solution):
-        self.visited.add(board.__hash__())
+        self.processedStates.add(board.__hash__())
         # dane statystyczne
         if self.reachedDepth < board.depth:
             self.reachedDepth = board.depth
@@ -36,12 +33,15 @@ class astar:
 
 
         moves = ut.checkMoves(board, lastmove)
-        self.counter = self.counter + len(moves)
+
+        #POWIEKSZAMY ILOSC STANOW ODWIEDZONYCH O SASIADOW
+        self.visitedStates = self.visitedStates + len(moves)
+
         for move in moves:
             newState = board.__deepcopy__()
             newState.depth += 1
             ut.makeMove(newState,move,ut.findZero(newState))
-            if newState.__hash__() not in self.visited:
+            if newState.__hash__() not in self.processedStates:
                 self.boards.append(newState)
 
         self.boards.sort()

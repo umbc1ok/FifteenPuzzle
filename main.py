@@ -28,15 +28,15 @@ if algorithmType == "bfs":
     solutionSequence = solver.solve(board,moveSequence)
     solvingTime = time.time_ns()-solvingStartTime
     solvingTime = solvingTime / 1000000
-    saver.saveToFile(solver.found, solutionFilePath, statsFilePath, solver.solution, solver.counter, solver.visited.__len__(),
+    saver.saveToFile(solver.found, solutionFilePath, statsFilePath, solver.solution, solver.visitedStates, solver.processedStates.__len__(),
                      solver.reachedDepth, solvingTime)
 elif algorithmType == "dfs":
     solver = dfs.dfs()
     solvingStartTime = time.time_ns()
-    solutionSequence = solver.solve(board,0,21,"","", moveSequence)
+    solutionSequence = solver.solve(board,21,"","", moveSequence)
     solvingTime = time.time_ns() - solvingStartTime
     solvingTime = solvingTime / 1000000
-    saver.saveToFile(solver.found, solutionFilePath, statsFilePath, solver.solution,  solver.counter, solver.visited.__len__(), solver.reachedDepth, solvingTime)
+    saver.saveToFile(solver.found, solutionFilePath, statsFilePath, solver.solution, solver.visitedStates, solver.processedStates.__len__(), solver.reachedDepth, solvingTime)
 elif algorithmType == "astr":
     solver = astar.astar(moveSequence)      #movesequence to hamm lub manh
     board.metric = solver.metric
@@ -44,7 +44,7 @@ elif algorithmType == "astr":
     solutionSequence = solver.solve(board,"","")
     solvingTime = time.time_ns() - solvingStartTime
     solvingTime = solvingTime / 1000000
-    saver.saveToFile(solver.found, solutionFilePath, statsFilePath, solver.solution, solver.counter, solver.visited.__len__(), solver.reachedDepth, solvingTime)
+    saver.saveToFile(solver.found, solutionFilePath, statsFilePath, solver.solution, solver.visitedStates, solver.processedStates.__len__(), solver.reachedDepth, solvingTime)
 
 
 

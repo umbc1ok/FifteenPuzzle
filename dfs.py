@@ -1,26 +1,21 @@
-import time
-
-import Board
-import reader
-import saver
 import utilities as u
 
 class dfs:
 
     def __init__(self):
-        self.counter = 1            #odwiedzone
+        self.visitedStates = 1            #odwiedzone
         self.reachedDepth = 0
         self.found = False
-        self.visited = {}           #przetworzone
+        self.processedStates = {}           #przetworzone
         self.solution = ''
 
-    def solve(self, board, depth, maxdepth, lastmove, solution, order):
+    def solve(self, board, maxdepth, lastmove, solution, order):
 
-        if depth > maxdepth:
+        if board.depth > maxdepth:
             return
         # dane statystyczne
-        if self.reachedDepth < depth:
-            self.reachedDepth = depth
+        if self.reachedDepth < board.depth:
+            self.reachedDepth = board.depth
         solution += lastmove
 
 
@@ -33,14 +28,15 @@ class dfs:
 
 
         moves = u.next_in_order(order, board)
-        self.counter = self.counter + len(moves)
+        self.visitedStates = self.visitedStates + len(moves)
         for move in moves:
             newState = board.__deepcopy__()
             u.makeMove(newState, move, u.findZero(newState))   #index funkcja (argument to wartosc z listy, w tym przypadku 0)
             newState.depth += 1
-            if ( (newState.__hash__() in self.visited) and (self.visited[newState.__hash__()] > depth)) or newState.__hash__() not in self.visited:
-                self.visited[newState.__hash__()] = newState.depth
-                self.solve(newState, depth + 1, maxdepth, move, solution, order)
+            if ((newState.__hash__() in self.processedStates) and (self.processedStates[newState.__hash__()] > newState.depth))\
+                    or newState.__hash__() not in self.processedStates:
+                self.processedStates[newState.__hash__()] = newState.depth
+                self.solve(newState, maxdepth, move, solution, order)
             if self.found is True:
                 return
         return
