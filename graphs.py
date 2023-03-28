@@ -56,7 +56,7 @@ def summaryGraph(data, criterion_nr, criterion_name, filename, strange_numbers):
         plt.yscale("log")
     #plt.savefig('ogolne_' + criterion_name)
     plt.savefig('./graphs/'+filename)
-    plt.show()
+    #plt.show()
 
 
 def astarGraph(data, criterion_nr, criterion_name, filename, strange_numbers):
@@ -98,7 +98,7 @@ def astarGraph(data, criterion_nr, criterion_name, filename, strange_numbers):
     if strange_numbers is True:
         plt.yscale("log")
     plt.savefig('./graphs/'+filename)
-    plt.show()
+    #plt.show()
 
 
 def dfsGraph(data, criterion_nr, criterion_name, filename, strange_numbers):
@@ -198,7 +198,7 @@ def dfsGraph(data, criterion_nr, criterion_name, filename, strange_numbers):
     if strange_numbers is True:
         plt.yscale("log")
     plt.savefig('./graphs/'+filename)
-    plt.show()
+    #plt.show()
 
 
 def bfsGraph(data, criterion_nr, criterion_name, filename, strange_numbers):
@@ -298,7 +298,7 @@ def bfsGraph(data, criterion_nr, criterion_name, filename, strange_numbers):
     if strange_numbers is True:
         plt.yscale("log")
     plt.savefig('./graphs/'+filename)
-    plt.show()
+    #plt.show()
 
 
 # method, order/heuristic, solution length, amount visited, amount processed, max depth, execution time
@@ -349,12 +349,12 @@ astarGraph(dataFrame, 1, "Długość rozwiązania", "astr_dlugosc_rozwiazania", 
 bfsGraph(dataFrame, 1, "Długość rozwiązania", "bfs_dlugosc_rozwiazania", False)
 dfsGraph(dataFrame, 1, "Długość rozwiązania", "dfs_dlugosc_rozwiazania", False)
 
-summaryGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "ogolne_odwiedzone", True)
+summaryGraph(dataFrame, 2, "Liczba stanów odwiedzonych w skali logarytmicznej", "ogolne_odwiedzone", True)
 astarGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "astr_odwiedzone", False)
 bfsGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "bfs_odwiedzone", False)
 dfsGraph(dataFrame, 2, "Liczba stanów odwiedzonych", "dfs_odwiedzone", False)
 
-summaryGraph(dataFrame, 3, "Liczba stanów przetworzonych", "ogolne_przetworzone", True)
+summaryGraph(dataFrame, 3, "Liczba stanów przetworzonych w skali logarytmicznej", "ogolne_przetworzone", True)
 astarGraph(dataFrame, 3, "Liczba stanów przetworzonych", "astr_przetworzone", False)
 bfsGraph(dataFrame, 3, "Liczba stanów przetworzonych", "bfs_przetworzone", False)
 dfsGraph(dataFrame, 3, "Liczba stanów przetworzonych", "dfs_przetworzone", False)
@@ -364,8 +364,8 @@ astarGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "astr
 bfsGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "bfs_głębokość", False)
 dfsGraph(dataFrame, 4, "Maksymalna osiągnięta głębokość rekursji", "dfs_głębokość", False)
 
-summaryGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "ogolne_czas", True)
-astarGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "astr_czas", False)
-bfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "bfs_czas", False)
-dfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego", "dfs_czas", False)
+summaryGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego[ms] w skali logarytmicznej", "ogolne_czas", True)
+astarGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego[ms]", "astr_czas", False)
+bfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego[ms]", "bfs_czas", False)
+dfsGraph(dataFrame, 5, "Czas trwania procesu obliczeniowego [ms]", "dfs_czas", False)
 
