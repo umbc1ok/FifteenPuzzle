@@ -2,7 +2,7 @@ from _csv import reader
 
 import chardet as chardet
 import matplotlib.pyplot as plt
-import pandas as pd
+#import pandas as pd
 import csv as csv
 
 

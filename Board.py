@@ -52,7 +52,7 @@ class Board:
     def hammingsMetric(self):  #mowi ile kafelkow jest na swoim miejscu
         counter = 0
         for i in range(0,self.w*self.h):
-            if self.tab[i]==str(i+1) and self.tab[i]!="0":
+            if self.tab[i]!=str(i+1) and self.tab[i]!="0":
                 counter = counter + 1
         counter += self.depth
         #print(self.depth)
